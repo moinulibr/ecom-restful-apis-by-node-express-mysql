@@ -1,31 +1,31 @@
-# Dependency directories (এগুলো ভুলেও গিটে যাবে না)
+# Dependency directories
 node_modules/
 jspm_packages/
 web_bindings/
 
-# Environment variables (নিরাপত্তার জন্য - তোমার ডেটাবেসের পাসওয়ার্ড ও সিক্রেট কি থাকে এখানে)
+# Environment variables
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 .env.sample
-!.env.example # .env.example ফাইলটি পুশ হওয়া ভালো, যাতে অন্যরা ফরম্যাট বোঝে
+!.env.example
 
-# Debug logs (কোড রান করার সময় যে এরর লগ তৈরি হয়)
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Operating System Files (উইন্ডোজ বা ম্যাকের নিজস্ব কিছু ফাইল)
+# Operating System Files
 .DS_Store
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# IDEs and Editors (কোড এডিটরের নিজস্ব কনফিগারেশন)
+# IDEs and Editors
 .idea/
 .vscode/
 *.suo
@@ -34,7 +34,7 @@ Desktop.ini
 *.sln
 *.sw?
 
-# Hosting & Build folders (ভবিষ্যতে বিল্ড বা ডেপ্লয় করলে যা তৈরি হবে)
+# Hosting & Build folders
 dist/
 build/
 .out/
