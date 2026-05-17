@@ -30,10 +30,12 @@ Follow these steps to run this project locally on your machine:
 ```bash
 git clone git@github.com:moinulibr/ecom-restful-apis-by-node-express-mysql.git
 cd ecom-restful-apis-by-node-express-mysql
+```
 
 ### 2. Install Dependencies
 ```bash
 npm install
+```
 
 ### 3. Environment Variables Setup
 Create a .env file in the root directory and add your configurations (refer to .env.example if available):
@@ -44,6 +46,7 @@ DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=ecom_db
 JWT_SECRET=your_super_secret_key
+```
 
 ### 4. Database Setup
 Open your MySQL client (like phpMyAdmin, TablePlus, or MySQL Workbench).
@@ -53,15 +56,17 @@ Import the database schema (if you have a .sql file in the project).
 ### 4. Run the Application
 ```bash
 npm run dev
+```
 
 For production mode:
 ```bash
 npm start
+```
 
 
-🤝 Contributing
+###🤝 Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
 
-📝 License
+###📝 License
 This project is licensed under the MIT License.
