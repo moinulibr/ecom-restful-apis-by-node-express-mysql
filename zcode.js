@@ -102,3 +102,7 @@ userLogin("moinul@gmail.com","123456")
         getUserProfile(1),
         getUserPosts(1)
     ]).then((data) =>{console.log(data)}).catch((error)=>{console.log(error)});//returns all promises
+
+    //async and await 
+    //async/await does not chnage the promise but it makes the code more readable
+    //async/await is more prettier than promises syntax
