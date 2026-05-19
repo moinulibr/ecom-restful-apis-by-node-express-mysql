@@ -106,3 +106,26 @@ userLogin("moinul@gmail.com","123456")
     //async and await 
     //async/await does not chnage the promise but it makes the code more readable
     //async/await is more prettier than promises syntax
+
+    //async function return ALWAYS Promise data
+
+    //syntax
+    async function test() {     
+    }
+
+    async function getData(){
+        const user = await userLogin("moinul@gmail.com","123456");
+        const profile = await getUserProfile(user.id);
+        const posts = await getUserPosts(user.id);
+        console.log(user);
+        console.log(profile);
+        console.log(posts);
+    }
+    getData();
+
+    //async always return promise
+    async function hello() {
+        return "Hello";
+    }
+
+    console.log(hello()); //Output: Promise { 'Hello' }
