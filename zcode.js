@@ -129,3 +129,13 @@ userLogin("moinul@gmail.com","123456")
     }
 
     console.log(hello()); //Output: Promise { 'Hello' }
+
+    // async method
+    async function getData() {
+        const user = await userLogin("moinul@gmail.com","123456");
+        const profile = await getUserProfile(user.id);
+        const posts = await getUserPosts(user.id);
+        console.log(user);
+        console.log(profile);
+        console.log(posts);
+    }
