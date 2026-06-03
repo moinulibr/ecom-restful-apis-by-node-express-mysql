@@ -1,9 +1,9 @@
-const dataType = require('sequelize');
-const sequelize = require('../config/db.config');
-const { DataTypes } = dataType;
-const bccrypt = require('bcryptjs');
+const { DataTypes } = require('sequelize'); 
+const dbConfig = require('../config/db.config');
+const bcrypt = require('bcryptjs');
 
-const User = sequelize.define('User', {
+
+const User = dbConfig.sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -34,8 +34,8 @@ const User = sequelize.define('User', {
     tableName: 'users',
     hooks: {
         beforeCreate: async (user) => {
-            const salt = await bccrypt.genSalt(10);
-            user.password = await bccrypt.hash(user.password, salt);
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(user.password, salt);
         }
     }
 });
