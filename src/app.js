@@ -4,6 +4,7 @@ require("dotenv").config();
 const {sequelize,connectDb} = require("./config/db.config");
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +24,7 @@ app.get('/api/v1/health', (req, res) => {
 //server start function 
 const startServer = async () => {
     // first of all connect with database
-    await connectDB(); // note: until connect with database, it will be try to listen server
+    await connectDb(); // note: until connect with database, it will be try to listen server
     
     // database table sync [same to laravel migration ]
     // { alter: true }// note: if true, it will update table when model changes  // note: It's forbidden to use false in production
