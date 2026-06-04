@@ -1,4 +1,4 @@
-const authService = require('../services/auth.service'); // সার্ভিস লেয়ার ইমপোর্ট // note: বিজনেস লজিক কল করার জন্য
+const authService = require('../services/auth.service');
 
 class AuthController {
     
@@ -38,6 +38,27 @@ class AuthController {
             return res.status(401).json({
                 status: 'fail',
                 message: error.message // note: 'Invalid email or password!'
+            });
+        }
+    }
+
+    async refreshToken(req, res) {
+        try {
+            //get the refreshToken from the request body
+            const { refreshToken } = req.body;
+            
+            //generateNewAccessToken
+            const result = await authService.generateNewAccessToken(refreshToken);
+            
+            return res.status(200).json({
+                status: 'success',
+                message: 'Access token refreshed successfully! 🔄',
+                data: result
+            });
+        } catch (error) {
+            return res.status(401).json({
+                status: 'fail',
+                message: error.message
             });
         }
     }

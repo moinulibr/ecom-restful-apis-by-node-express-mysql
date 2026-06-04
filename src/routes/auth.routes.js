@@ -8,6 +8,8 @@ router.post('/register', authController.register); // note: POST /api/v1/auth/re
 router.post('/login', authController.login);       // note: POST /api/v1/auth/login
 
 
+router.post('/refresh-token', authController.refreshToken);
+
 router.get('/admin-dashboard', verifyToken, restrictTo('admin'), (req, res) => {
     res.status(200).json({
         status: 'success',
