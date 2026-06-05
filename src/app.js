@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const {sequelize,connectDb} = require("./config/db.config");
 const authRoutes = require('./routes/auth.routes');
+const frontendRoutes = require('./routes/frontend.routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,6 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // --- Routes Registration ---
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/frontend', frontendRoutes);
+
 
 // Base Route Test
 app.get('/api/v1/health', (req, res) => {
