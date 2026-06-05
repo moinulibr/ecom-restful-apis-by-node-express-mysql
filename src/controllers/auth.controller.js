@@ -8,7 +8,7 @@ class AuthController {
             
             return res.status(201).json({
                 status: 'success',
-                message: 'User registered successfully! 🎉',
+                message: 'User registered successfully!',
                 data: {
                     id: newUser.id,
                     name: newUser.name,
@@ -31,7 +31,7 @@ class AuthController {
             
             return res.status(200).json({
                 status: 'success',
-                message: 'Login successful! 🚀',
+                message: 'Login successful!',
                 data: result // note: in this result - user, accessToken and refreshToken
             });
         } catch (error) {
