@@ -21,4 +21,4 @@ class CategoryService {
     }
 }
 
-module.exports = new ServiceLayer()
+module.exports = new CategoryService()
