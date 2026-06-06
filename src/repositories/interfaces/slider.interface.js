@@ -4,6 +4,6 @@ class SliderInterface {
             throw new Error("Abstract Class 'SliderInterface' cannot be instantiated directly. ❌");
         }
     }
-    async getActiveSliders() {} // note: স্লাইডার আনার চুক্তি // English note: Contract to fetch active banners for homepage carousel
+    async getActiveSliders() {} // note: Contract to fetch active banners for homepage carousel
 }
 module.exports = SliderInterface;
