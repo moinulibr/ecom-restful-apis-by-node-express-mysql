@@ -4,6 +4,7 @@ require("dotenv").config();
 const {sequelize,connectDb} = require("./config/db.config");
 const authRoutes = require('./routes/auth.routes');
 const frontendRoutes = require('./routes/frontend.routes');
+require('./models/association');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
