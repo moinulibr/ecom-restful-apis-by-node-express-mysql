@@ -2,6 +2,7 @@ const authService = require('../services/auth.service');
 
 class AuthController {
     
+    //User registration
     async register(req, res) {
         try {
             const newUser = await authService.registerUser(req.body);
