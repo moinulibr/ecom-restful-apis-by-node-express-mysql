@@ -4,6 +4,31 @@ const User = require('../models/user.model');
 class UserRepository extends UserInterface {
     
     async create(userData) {
+        return await User.create(userData);
+    }
+
+    async findByEmail(email) {
+        return await User.findOne({ where: { email: email } });
+    }
+
+    async findById(id) {
+        return await User.findByPk(id);
+    }
+
+    async updateToken(id, token) {
+        return await User.update({ refresh_token: token }, { where: { id } });
+    }
+}
+
+module.exports = new UserRepository();
+
+/*
+const UserInterface = require('./interfaces/user.interface');
+const User = require('../models/user.model');
+
+class UserRepository extends UserInterface {
+    
+    async create(userData) {
         const user = await User.create(userData);
         return user;
     }
@@ -25,3 +50,4 @@ class UserRepository extends UserInterface {
 }
 
 module.exports = new UserRepository();
+*/

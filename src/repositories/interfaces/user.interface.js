@@ -1,7 +1,6 @@
-class UserInterface{
-    constructor(userRepository){
-        this.userRepository = userRepository;
-        if(this.userRepository === UserInterface){
+class UserInterface {
+    constructor() {
+        if (this.constructor === UserInterface) {
             throw new Error("Cannot instantiate Abstract Class 'UserInterface' directly. ❌");
         }
     }
