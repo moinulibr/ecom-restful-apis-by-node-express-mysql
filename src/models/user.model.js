@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const User = dbConfig.sequelize.define('User', {
     id: {
-        type: DataTypes.BIGINT.UNSIGNED, // note: স্ক্রিনশটের bigint unsigned এর সাথে ম্যাচড
+        type: DataTypes.BIGINT.UNSIGNED,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
@@ -73,7 +73,7 @@ const User = dbConfig.sequelize.define('User', {
 }, {
     timestamps: true,
     tableName: 'users',
-    underscored: true, // note: ডাটাবেজের স্নেক-কেস (created_at/updated_at) হ্যান্ডেল করবে
+    underscored: true, //(created_at/updated_at)
     hooks: {
         beforeCreate: async (user) => {
             if (user.password) {
