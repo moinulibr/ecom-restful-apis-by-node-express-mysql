@@ -9,6 +9,11 @@ class UserInterface {
     async findByEmail(email) {}
     async findById(id) {}
     async updateToken(id, token) {}
+
+    async updatePassword(id, hashedWithSaltPassword) {}
+    async saveResetToken(email, token) {}
+    async findResetToken(email, token) {}
+    async deleteResetToken(email) {}
 }
 
 module.exports = UserInterface;
