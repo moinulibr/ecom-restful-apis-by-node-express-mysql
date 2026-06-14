@@ -18,6 +18,28 @@ class UserRepository extends UserInterface {
     async updateToken(id, token) {
         return await User.update({ refresh_token: token }, { where: { id } });
     }
+
+    async updatePassword(id, hashedWithSaltPassword) {
+        return await User.update({ password: hashedWithSaltPassword }, { where: { id } });
+    }
+
+    async saveResetToken(email, token) {
+        
+        await PasswordResetToken.destroy({ where: { email } });
+        return await PasswordResetToken.create({
+            email,
+            token,
+            created_at: new Date()
+        });
+    }
+
+    async findResetToken(email, token) {
+        return await PasswordResetToken.findOne({ where: { email, token } });
+    }
+
+    async deleteResetToken(email) {
+        return await PasswordResetToken.destroy({ where: { email } });
+    }
 }
 
 module.exports = new UserRepository();
