@@ -60,6 +60,60 @@ class AuthController {
             });
         }
     }
+
+
+    async logout(req, res) {
+        try {
+            const userId = req.user?.id || 1; 
+            await authService.logoutUser(userId);
+            
+            return ResponseUtil.success(res, 'Logged out successfully. Token revoked! 🚪');
+        } catch (error) {
+            return ResponseUtil.error(res, error.message, 500);
+        }
+    }
+
+    async changePassword(req, res) {
+        try {
+            const userId = req.user?.id || 1;
+            const { old_password, new_password } = req.body;
+
+            if (!old_password || !new_password) {
+                return ResponseUtil.error(res, 'Both current and new passwords are required.', 400);
+            }
+
+            await authService.changePassword(userId, old_password, new_password);
+            return ResponseUtil.success(res, 'Password updated successfully! 🔒');
+        } catch (error) {
+            return ResponseUtil.error(res, error.message, 400);
+        }
+    }
+
+    async forgotPassword(req, res) {
+        try {
+            const { email } = req.body;
+            if (!email) return ResponseUtil.error(res, 'Email field is required.', 400);
+
+            const result = await authService.sendPasswordResetToken(email);
+            return ResponseUtil.success(res, 'Password reset token generated. Check terminal/response.', result);
+        } catch (error) {
+            return ResponseUtil.error(res, error.message, 400);
+        }
+    }
+
+    async resetPassword(req, res) {
+        try {
+            const { email, token, new_password } = req.body;
+            if (!email || !token || !new_password) {
+                return ResponseUtil.error(res, 'Email, token, and new password are required.', 400);
+            }
+
+            await authService.resetPasswordWithToken(email, token, new_password);
+            return ResponseUtil.success(res, 'Password has been reset successfully. You can now login with new password. 🎉');
+        } catch (error) {
+            return ResponseUtil.error(res, error.message, 400);
+        }
+    }
 }
 
 module.exports = new AuthController();
