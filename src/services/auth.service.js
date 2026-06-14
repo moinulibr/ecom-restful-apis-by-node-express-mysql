@@ -72,6 +72,51 @@ class AuthService {
             throw new Error('Refresh token expired or invalid! Please login again. ❌');
         }
     }
+
+
+    async logoutUser(userId) {
+        await userRepository.updateToken(userId, null);
+        return true;
+    }
+
+    async changePassword(userId, oldPassword, newPassword) {
+        const user = await userRepository.findById(userId);
+        if (!user) throw new Error('User not found! ❌');
+
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        if (!isMatch) throw new Error('Current password does not match! ❌');
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+        await userRepository.updatePassword(userId, hashedNewPassword);
+        return true;
+    }
+
+    async sendPasswordResetToken(email) {
+        const user = await userRepository.findByEmail(email);
+        if (!user) throw new Error('No user found with this email address! ❌');
+
+        const token = crypto.randomInt(100000, 999999).toString();
+        
+        await userRepository.saveResetToken(email, token);
+
+        return { email, token, message: "Reset token generated successfully. Send this via mail." };
+    }
+
+    async resetPasswordWithToken(email, token, newPassword) {
+
+        const resetEntry = await userRepository.findResetToken(email, token);
+        if (!resetEntry) throw new Error('Invalid reset token or email! ❌');
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+        await userRepository.updatePassword(resetEntry.email, hashedNewPassword);
+        await userRepository.deleteResetToken(resetEntry.email);
+
+        return true;
+    }
 }
 
 module.exports = new AuthService();
