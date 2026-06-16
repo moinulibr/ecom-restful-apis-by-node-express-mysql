@@ -64,10 +64,13 @@ class AuthController {
 
     async logout(req, res) {
         try {
-            const userId = req.user?.id || 1; 
-            await authService.logoutUser(userId);
+            const userId = req.user?.id || null; 
+            if(userId){
+                await authService.logoutUser(userId);
+                return ResponseUtil.success(res, 'Logged out successfully. Token revoked! 🚪');
+            }
+            return ResponseUtil.error(res, "User Id not found", 500);
             
-            return ResponseUtil.success(res, 'Logged out successfully. Token revoked! 🚪');
         } catch (error) {
             return ResponseUtil.error(res, error.message, 500);
         }
