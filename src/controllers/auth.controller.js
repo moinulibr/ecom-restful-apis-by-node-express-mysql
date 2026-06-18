@@ -78,15 +78,18 @@ class AuthController {
 
     async changePassword(req, res) {
         try {
-            const userId = req.user?.id || 1;
+            const userId = req.user?.id || null;
             const { old_password, new_password } = req.body;
 
             if (!old_password || !new_password) {
                 return ResponseUtil.error(res, 'Both current and new passwords are required.', 400);
             }
-
-            await authService.changePassword(userId, old_password, new_password);
-            return ResponseUtil.success(res, 'Password updated successfully! 🔒');
+            if(userId){
+                await authService.changePassword(userId, old_password, new_password);
+                return ResponseUtil.success(res, 'Password updated successfully! 🔒');
+            }
+            return ResponseUtil.error(res, "User Id not found", 400);
+            
         } catch (error) {
             return ResponseUtil.error(res, error.message, 400);
         }
